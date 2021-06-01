@@ -28,5 +28,22 @@ def hello(name=None):
     return render_template("hello.html", name=name)
 
 
+@app.route("/greet", defaults={"name": "programmer"})
+@app.route("/greet/<name>")
+def greet(name):
+    return "<h1>Hello, {}!<h1>".format(name)
+
+
+@app.route("/hello/hewei")
+def hello1():
+    name = request.args.get("name", "Flask")
+    return "<h1>hello, {}!<h1>".format(name)
+
+
+@app.route("/hello2", methods=["GET", "POST"])
+def hello2():
+    return "<h1>hello, hewei!</h1>"
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
